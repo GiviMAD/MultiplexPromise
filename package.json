@@ -1,0 +1,23 @@
+{
+  "name": "multiplex-promise",
+  "version": "1.0.0",
+  "description": "Multiplex a Promise execution",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc -p .",
+    "test": "c8 --check-coverage --lines 100 tape -r ts-node/register/transpile-only ./index.spec.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GiviMAD/MultiplexPromise.git"
+  },
+  "author": "Miguel Álvarez Díez",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/tape": "^4.13.2",
+    "c8": "^7.8.0",
+    "tape": "^5.3.1",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.4.2"
+  }
+}
