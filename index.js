@@ -20,11 +20,9 @@ var MultiplexPromise = /** @class */ (function () {
             };
             _this.op()
                 .then(function (result) {
-                resolve(result);
                 _this.unlock(getAwaiters(), undefined, result);
             })
                 .catch(function (err) {
-                reject(err);
                 _this.unlock(getAwaiters(), err);
             });
         });
