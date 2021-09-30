@@ -11,7 +11,7 @@ export class MultiplexPromise<T = void> {
         return new Promise<T>((resolve, reject) => {
             const getAwaiters = () => {
                 const awaiters = this.awaiters.splice(0);
-                awaiters.unshift((err, data) => data ? resolve(data) : reject(err));
+                awaiters.unshift(this.getAwaiter(resolve, reject));
                 return awaiters;
             }
             this.op()
@@ -23,8 +23,11 @@ export class MultiplexPromise<T = void> {
                 })
         });
     }
+    private getAwaiter(resolve: (value: T) => void, reject: (reason?: any) => void): Awaiter<T> {
+        return (err, data) => !err ? reject(err) : resolve(data as T);
+    }
     private wait() {
-        return new Promise<T>((resolve, reject) => this.awaiters.push((err, data) => data ? resolve(data) : reject(err)));
+        return new Promise<T>((resolve, reject) => this.awaiters.push(this.getAwaiter(resolve, reject)));
     }
     private tryLock() {
         return (this.locked) ? !this.locked : this.locked = true;

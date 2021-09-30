@@ -15,7 +15,7 @@ var MultiplexPromise = /** @class */ (function () {
         return new Promise(function (resolve, reject) {
             var getAwaiters = function () {
                 var awaiters = _this.awaiters.splice(0);
-                awaiters.unshift(function (err, data) { return data ? resolve(data) : reject(err); });
+                awaiters.unshift(_this.getAwaiter(resolve, reject));
                 return awaiters;
             };
             _this.op()
@@ -27,9 +27,12 @@ var MultiplexPromise = /** @class */ (function () {
             });
         });
     };
+    MultiplexPromise.prototype.getAwaiter = function (resolve, reject) {
+        return function (err, data) { return !err ? reject(err) : resolve(data); };
+    };
     MultiplexPromise.prototype.wait = function () {
         var _this = this;
-        return new Promise(function (resolve, reject) { return _this.awaiters.push(function (err, data) { return data ? resolve(data) : reject(err); }); });
+        return new Promise(function (resolve, reject) { return _this.awaiters.push(_this.getAwaiter(resolve, reject)); });
     };
     MultiplexPromise.prototype.tryLock = function () {
         return (this.locked) ? !this.locked : this.locked = true;

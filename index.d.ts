@@ -4,6 +4,7 @@ export declare class MultiplexPromise<T = void> {
     private awaiters;
     constructor(op: () => Promise<T>);
     run(): Promise<T>;
+    private getAwaiter;
     private wait;
     private tryLock;
     private unlock;

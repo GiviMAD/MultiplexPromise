@@ -1,8 +1,17 @@
 {
   "name": "multiplex-promise",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Multiplex a Promise execution",
   "main": "index.js",
+  "files": [
+    "index.js",
+    "index.d.ts"
+  ],
+  "keywords": [
+    "promise",
+    "multiplex",
+    "async"
+  ],
   "scripts": {
     "build": "tsc -p .",
     "test": "c8 --check-coverage --lines 100 tape -r ts-node/register/transpile-only ./index.spec.ts"
