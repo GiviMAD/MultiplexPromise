@@ -16,11 +16,9 @@ export class MultiplexPromise<T = void> {
             }
             this.op()
                 .then(result => {
-                    resolve(result);
                     this.unlock(getAwaiters(), undefined, result);
                 })
                 .catch(err => {
-                    reject(err);
                     this.unlock(getAwaiters(), err);
                 })
         });
