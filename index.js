@@ -28,7 +28,7 @@ var MultiplexPromise = /** @class */ (function () {
         });
     };
     MultiplexPromise.prototype.getAwaiter = function (resolve, reject) {
-        return function (err, data) { return !err ? reject(err) : resolve(data); };
+        return function (err, data) { return err ? reject(err) : resolve(data); };
     };
     MultiplexPromise.prototype.wait = function () {
         var _this = this;

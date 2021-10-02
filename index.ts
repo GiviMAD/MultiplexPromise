@@ -24,7 +24,7 @@ export class MultiplexPromise<T = void> {
         });
     }
     private getAwaiter(resolve: (value: T) => void, reject: (reason?: any) => void): Awaiter<T> {
-        return (err, data) => !err ? reject(err) : resolve(data as T);
+        return (err, data) => err ? reject(err) : resolve(data as T);
     }
     private wait() {
         return new Promise<T>((resolve, reject) => this.awaiters.push(this.getAwaiter(resolve, reject)));

@@ -1,6 +1,6 @@
 {
   "name": "multiplex-promise",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Multiplex a Promise execution",
   "main": "index.js",
   "files": [
